@@ -1,0 +1,8 @@
+MÓDULO 1 - INTRODUÇÃO
+# Tag <script> que representa a parte do código do javascript
+# QuerySelector
+# Mudando o título com o .textContent
+# Boas práticas
+    - usar o src dentro da tag <script> para indicar o arquivo .js
+
+MÓDULO 2 - VARIÁVEIS E OPERADORES
