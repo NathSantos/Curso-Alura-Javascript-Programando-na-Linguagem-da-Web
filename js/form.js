@@ -11,10 +11,20 @@ botao.addEventListener("click", function(event){
 
     var pacienteTr = montaTr(paciente);     // CRIA A TR E A TD
 
+    var erros = validaPaciente(paciente);
+
+    if(erros.length > 0) {
+        exibeMensagensDeErro(erros);
+        return;
+    }
+
     var tabela = document.querySelector("#tabela-pacientes");
     tabela.appendChild(pacienteTr);
 
     form.reset();   // PARA LIMPAR OS DADOS COLOCADOS NO CAMPO DO FORMULÁRIO
+
+    var mensagensErro = document.querySelector("#mensagens-erro");
+    mensagensErro.innerHTML = "";
 });
 
 
@@ -56,4 +66,46 @@ function montaTd(dado,classe){
     td.classList.add(classe);
 
     return td;
+}
+
+function validaPaciente(paciente) {
+
+    var erros = [];
+
+    if (paciente.nome.length == 0){
+        erros.push("O nome não pode ser em branco");
+    }
+
+    if (paciente.gordura.length == 0){
+        erros.push("A gordura não pode ser em branco");
+    }
+
+    if (paciente.peso.length == 0){
+        erros.push("O peso não pode ser em branco");
+    }
+
+    if (paciente.altura.length == 0){
+        erros.push("A altura não pode ser em branco");
+    }
+
+    if(paciente.peso <= 0 || paciente.peso >= 1000) {
+        erros.push("Peso é inválido");
+    }
+
+    if(paciente.altura <= 0 || paciente.altura >= 3.00) {
+        erros.push("Altura é inválida");
+    }
+
+    return erros;
+}
+
+function exibeMensagensDeErro(erros) {
+    var ul = document.querySelector("#mensagens-erro");
+    ul.innerHTML = "";  // não permite acúmulo de mensagens de erro
+
+    erros.forEach(function(erro) {
+        var li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
 }
