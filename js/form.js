@@ -9,24 +9,20 @@ botao.addEventListener("click", function(event){
 
     var paciente = obtemPacienteDoForm(form);   // EXTRAINDO INFORMAÇÕES DO PACIENTE DO FORM
 
-    var pacienteTr = montaTr(paciente);     // CRIA A TR E A TD
-
     var erros = validaPaciente(paciente);
 
     if(erros.length > 0) {
         exibeMensagensDeErro(erros);
         return;
     }
-
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
+    
+    adicionaPacienteNaTabela(paciente)
 
     form.reset();   // PARA LIMPAR OS DADOS COLOCADOS NO CAMPO DO FORMULÁRIO
 
     var mensagensErro = document.querySelector("#mensagens-erro");
     mensagensErro.innerHTML = "";
 });
-
 
 function obtemPacienteDoForm(form) {
 
@@ -39,6 +35,12 @@ function obtemPacienteDoForm(form) {
     }
 
     return paciente;
+}
+
+function adicionaPacienteNaTabela(paciente) {
+    var pacienteTr = montaTr(paciente);             // CRIA A TR E A TD
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
 }
 
 function montaTr(paciente) {
